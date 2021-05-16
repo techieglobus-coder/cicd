@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "This is second script"
+echo "This is my $myjob script"
+mkdir -p /opt/$myjob
