@@ -13,13 +13,13 @@ stage(checking_docker_containers){
 }
 stage(building_image){
  steps{
- sh 'docker -H 172.31.13.181:4243 build -t samridhrakesh/myscript:${BUILD_NUMBER} .'
+ sh 'docker -H 172.31.13.181:4243 build -t samridhrakesh/myscript:latest .'
 }
 }
 stage(pushing_image){
 steps{
  sh 'number="${BUILD_NUMBER}"'
- build job: 'pushjob', parameters: [string(name: 'number', value: \'"${number}"\')]
+ build job: 'pushjob', parameters: [string(name: 'number', value: 'latest')]
 }
 }
 }
