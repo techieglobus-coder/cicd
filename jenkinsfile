@@ -18,8 +18,8 @@ stage(building_image){
 }
 stage(pushing_image){
 steps{
- sh 'number="${BUILD_NUMBER}"'
- build job: 'pushjob', parameters: [string(name: 'BUILD', value: '${number}')]
+ number="${BUILD_NUMBER}"
+ build job: 'pushjob', parameters: [string(name: 'number', value: '${number}')]
 }
 }
 }
