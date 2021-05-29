@@ -1,0 +1,25 @@
+pipeline{
+agent any
+stages{
+stage(pull_code_from_git){
+steps{
+ git branch: 'main', credentialsId: '3f67425c-bdfb-4bd8-8e68-48817477aeb2', url: 'https://github.com/techieglobus-coder/cicd.git'
+}
+}
+stage(checking_docker_containers){
+ steps{
+ sh 'docker -H 172.31.13.181:4243 "ps"'
+}
+}
+stage(building_image){
+ steps{
+ sh 'docker -H 172.31.13.181:4243 build -t samridhrakesh/myscript:${BUILD_NUMBER} .'
+}
+}
+stage(pushing_image){
+steps{
+ sh 'echo "pushing image to dockerhub"'
+}
+}
+}
+}
