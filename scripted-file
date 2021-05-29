@@ -1,0 +1,19 @@
+node('master') {
+
+stage("pull_code_from_git"){
+git branch: 'main', credentialsId: '3f67425c-bdfb-4bd8-8e68-48817477aeb2', url: 'https://github.com/techieglobus-coder/cicd.git'
+}
+
+stage("checking_docker_containers"){
+sh 'docker -H 172.31.13.181:4243 "ps"'
+}
+
+stage("building_image"){
+sh 'docker -H 172.31.13.181:4243 build -t samridhrakesh/myscript:${BUILD_NUMBER} .'
+}
+
+stage("push_image"){
+def num = "${BUILD_NUMBER}"
+build job: 'pushjob', parameters: [string(name: 'number', value: "$num")]
+}
+}
