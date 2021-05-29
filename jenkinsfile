@@ -18,7 +18,7 @@ stage(building_image){
 }
 stage(pushing_image){
 steps{
- sh 'echo "pushing image to dockerhub"'
+ build job: 'pushjob', parameters: [string(name: 'BUILD', value: '${BUILD_NUMBER}')]
 }
 }
 }
