@@ -18,7 +18,8 @@ stage(building_image){
 }
 stage(pushing_image){
 steps{
- build job: 'pushjob', parameters: [string(name: 'BUILD', value: '${BUILD_NUMBER}')]
+ def number = '${BUILD_NUMBER}'
+ build job: 'pushjob', parameters: [string(name: 'BUILD', value: '${number}')]
 }
 }
 }
